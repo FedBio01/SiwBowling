@@ -51,6 +51,9 @@ public class AuthenticationController {
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 				return "admin/indexAdmin.html";
 			}
+			if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
+				return "registeredUser/indexRegisteredUser.html";
+			}
 		}
         return "index.html";
 	}
@@ -63,6 +66,9 @@ public class AuthenticationController {
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/indexAdmin.html";
         }
+    	if (credentials.getRole().equals(Credentials.DEFAULT_ROLE)) {
+			return "registeredUser/indexRegisteredUser.html";
+		}
         return "index.html";
     }
 

@@ -1,6 +1,8 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
 public class Reservation {
@@ -20,11 +24,24 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+	@Min(1)
+	@Max(10)
 	private Integer numberOfPlayers;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate reservationDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH")
+	private LocalDateTime reservationDate;
 	
+	@DateTimeFormat(pattern = "HH")
+	private LocalTime reservationTime;
+	
+	public LocalTime getReservationTime() {
+		return reservationTime;
+	}
+
+	public void setReservationTime(LocalTime reservationTime) {
+		this.reservationTime = reservationTime;
+	}
+
 	@OneToOne
 	private BowlingMatch bowlingMatch;
 	
@@ -53,11 +70,11 @@ public class Reservation {
 	}
 	
 	
-	public LocalDate getReservationDate() {
+	public LocalDateTime getReservationDate() {
 		return reservationDate;
 	}
 	
-	public void setReservationDate(LocalDate reservationDate) {
+	public void setReservationDate(LocalDateTime reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
