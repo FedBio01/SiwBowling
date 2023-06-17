@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.model.BowlingMatch;
-import it.uniroma3.siw.repository.BowlingMatchRepository;
+import it.uniroma3.siw.model.BowlingAlley;
+import it.uniroma3.siw.repository.BowlingAlleyRepository;
 
 @Component
-public class BowlingMatchValidator implements Validator {
+public class BowlingAlleyValidator implements Validator {
 	@Autowired
-	private BowlingMatchRepository bowlingMatchRepository;
+	private BowlingAlleyRepository bowlingAlleyRepository;
 
 	@Override
 	public boolean supports(Class<?> clazz) {

@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.uniroma3.siw.controller.validator.BowlingMatchValidator;
+import it.uniroma3.siw.controller.validator.BowlingAlleyValidator;
 import it.uniroma3.siw.model.Reservation;
-import it.uniroma3.siw.model.BowlingMatch;
+import it.uniroma3.siw.model.BowlingAlley;
 import it.uniroma3.siw.repository.ReservationRepository;
-import it.uniroma3.siw.repository.BowlingMatchRepository;
+import it.uniroma3.siw.repository.BowlingAlleyRepository;
 import jakarta.validation.Valid;
 
 @Controller
-public class BowlingMatchController {
+public class BowlingAlleyController {
 
 }
 

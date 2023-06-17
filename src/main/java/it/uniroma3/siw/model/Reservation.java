@@ -43,7 +43,7 @@ public class Reservation {
 	}
 
 	@OneToOne
-	private BowlingMatch bowlingMatch;
+	private BowlingAlley bowlingAlley;
 	
 	public Integer getNumberOfPlayers() {
 		return numberOfPlayers;
@@ -53,12 +53,12 @@ public class Reservation {
 		this.numberOfPlayers = numberOfPlayers;
 	}
 
-	public BowlingMatch getBowlingMatch() {
-		return bowlingMatch;
+	public BowlingAlley getBowlingMatch() {
+		return bowlingAlley;
 	}
 
-	public void setBowlingMatch(BowlingMatch bowlingMatch) {
-		this.bowlingMatch = bowlingMatch;
+	public void setBowlingMatch(BowlingAlley bowlingMatch) {
+		this.bowlingAlley = bowlingMatch;
 	}
 
 	public Long getId() {
@@ -80,7 +80,7 @@ public class Reservation {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bowlingMatch, numberOfPlayers, reservationDate);
+		return Objects.hash(bowlingAlley, numberOfPlayers, reservationDate);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class Reservation {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
-		return Objects.equals(bowlingMatch, other.bowlingMatch)
+		return Objects.equals(bowlingAlley, other.bowlingAlley)
 				&& Objects.equals(numberOfPlayers, other.numberOfPlayers)
 				&& Objects.equals(reservationDate, other.reservationDate);
 	}

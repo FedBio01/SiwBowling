@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class BowlingMatch {
+public class BowlingAlley {
     
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +23,7 @@ public class BowlingMatch {
         @Max(5)
         private Integer alleyNumber;
         
-        @OneToOne(mappedBy="bowlingMatch")
+        @OneToOne(mappedBy="bowlingAlley")
         private Reservation reservation;
 
 		public Long getId() {
@@ -63,7 +63,7 @@ public class BowlingMatch {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			BowlingMatch other = (BowlingMatch) obj;
+			BowlingAlley other = (BowlingAlley) obj;
 			return Objects.equals(alleyNumber, other.alleyNumber) && Objects.equals(reservation, other.reservation);
 		}
 }

@@ -33,21 +33,21 @@
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
   		</div>
 		<div>
-			
-			<input type="text" th:field="${review.title}" required/>
 			<label>Titolo:</label>
+			<input type="text" th:field="${review.title}" required/>
 			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
 		    </span>
 		</div>
 		<div>
-			<input type="number" th:field="${review.rating}" required/>
 			<label>Valutazione [1-5]:</label> 
+			<input type="number" th:field="${review.rating}" required/>
 			<span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
 		    </span>
 		</div>
 		<div>
-			 <input type="text" th:field="${review.text}" required/>
-			 <label>Testo:</label>
+			<label>Testo:</label>
+			<input type="text" th:field="${review.text}" required/>
+			 
 		</div>
      
       <button type="submit">Conferma</button>
