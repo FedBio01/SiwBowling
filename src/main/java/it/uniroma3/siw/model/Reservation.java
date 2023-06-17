@@ -15,31 +15,43 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Reservation {
-    @Id
+	
+	public static final Integer TOTAL_BOWLING_ALLEY = 5;
+   
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-	private String name;
-	private String surname;
+	private Integer numberOfPlayers;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dateOfBirth;
-	private String urlOfPicture;
+	private LocalDate reservationDate;
 	
-	@ManyToMany(mappedBy="actors")
-	private Set<BowlingAlley> starredMovies;
+	@OneToOne
+	private BowlingMatch bowlingMatch;
 	
-	@OneToMany(mappedBy="director")
-	private List<BowlingAlley> directedMovies;
+
 	
-	public Reservation(){
-		this.starredMovies = new HashSet<>();
-		this.directedMovies = new LinkedList<>();
+	public Integer getNumberOfPlayers() {
+		return numberOfPlayers;
 	}
-	
+
+	public void setNumberOfPlayers(Integer numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
+	}
+
+	public BowlingMatch getBowlingMatch() {
+		return bowlingMatch;
+	}
+
+	public void setBowlingMatch(BowlingMatch bowlingMatch) {
+		this.bowlingMatch = bowlingMatch;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -48,57 +60,18 @@ public class Reservation {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
+	
+	public LocalDate getReservationDate() {
+		return reservationDate;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getSurname() {
-		return surname;
-	}
-	
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
-	
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-	
-	public String getUrlOfPicture() {
-		return urlOfPicture;
-	}
-	
-	public void setUrlOfPicture(String urlOfPicture) {
-		this.urlOfPicture = urlOfPicture;
-	}
-	
-	public Set<BowlingAlley> getActorOf() {
-		return starredMovies;
-	}
-
-	public void setActorOf(Set<BowlingAlley> starredMovies) {
-		this.starredMovies = starredMovies;
-	}
-
-	public List<BowlingAlley> getDirectorOf() {
-		return directedMovies;
-	}
-
-	public void setDirectorOf(List<BowlingAlley> directedMovies) {
-		this.directedMovies = directedMovies;
+	public void setReservationDate(LocalDate reservationDate) {
+		this.reservationDate = reservationDate;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, surname);
+		return Objects.hash(bowlingMatch, numberOfPlayers, reservationDate);
 	}
 
 	@Override
@@ -110,7 +83,16 @@ public class Reservation {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
-		return Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
+		return Objects.equals(bowlingMatch, other.bowlingMatch)
+				&& Objects.equals(numberOfPlayers, other.numberOfPlayers)
+				&& Objects.equals(reservationDate, other.reservationDate);
 	}
+	
+	
+	
+	
+
+
+
 
 }

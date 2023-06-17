@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.validator.BowlingAlleyValidator;
 import it.uniroma3.siw.model.Reservation;
-import it.uniroma3.siw.model.BowlingAlley;
+import it.uniroma3.siw.model.BowlingMatch;
 import it.uniroma3.siw.repository.ReservationRepository;
 import it.uniroma3.siw.repository.BowlingAlleyRepository;
 import jakarta.validation.Valid;
@@ -34,7 +34,7 @@ public class BowlingAlleyController {
 
 	@GetMapping(value="/admin/formNewMovie")
 	public String formNewMovie(Model model) {
-		model.addAttribute("movie", new BowlingAlley());
+		model.addAttribute("movie", new BowlingMatch());
 		return "admin/formNewMovie.html";
 	}
 
@@ -59,7 +59,7 @@ public class BowlingAlleyController {
 	public String setDirectorToMovie(@PathVariable("directorId") Long directorId, @PathVariable("movieId") Long movieId, Model model) {
 		
 		Reservation director = this.reservationRepository.findById(directorId).get();
-		BowlingAlley movie = this.bowlingAlleyRepository.findById(movieId).get();
+		BowlingMatch movie = this.bowlingAlleyRepository.findById(movieId).get();
 		movie.setDirector(director);
 		this.bowlingAlleyRepository.save(movie);
 		
@@ -76,7 +76,7 @@ public class BowlingAlleyController {
 	}
 
 	@PostMapping("/admin/movie")
-	public String newMovie(@Valid @ModelAttribute("movie") BowlingAlley movie, BindingResult bindingResult, Model model) {
+	public String newMovie(@Valid @ModelAttribute("movie") BowlingMatch movie, BindingResult bindingResult, Model model) {
 		
 		this.bowlingAlleyValidator.validate(movie, bindingResult);
 		if (!bindingResult.hasErrors()) {
@@ -123,7 +123,7 @@ public class BowlingAlleyController {
 
 	@GetMapping(value="/admin/addActorToMovie/{actorId}/{movieId}")
 	public String addActorToMovie(@PathVariable("actorId") Long actorId, @PathVariable("movieId") Long movieId, Model model) {
-		BowlingAlley movie = this.bowlingAlleyRepository.findById(movieId).get();
+		BowlingMatch movie = this.bowlingAlleyRepository.findById(movieId).get();
 		Reservation actor = this.reservationRepository.findById(actorId).get();
 		Set<Reservation> actors = movie.getActors();
 		actors.add(actor);
@@ -139,7 +139,7 @@ public class BowlingAlleyController {
 	
 	@GetMapping(value="/admin/removeActorFromMovie/{actorId}/{movieId}")
 	public String removeActorFromMovie(@PathVariable("actorId") Long actorId, @PathVariable("movieId") Long movieId, Model model) {
-		BowlingAlley movie = this.bowlingAlleyRepository.findById(movieId).get();
+		BowlingMatch movie = this.bowlingAlleyRepository.findById(movieId).get();
 		Reservation actor = this.reservationRepository.findById(actorId).get();
 		Set<Reservation> actors = movie.getActors();
 		actors.remove(actor);

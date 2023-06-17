@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class BowlingAlley {
+public class BowlingMatch {
     
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -97,7 +97,7 @@ public class BowlingAlley {
                 return false;
             if (getClass() != obj.getClass())
                 return false;
-            BowlingAlley other = (BowlingAlley) obj;
+            BowlingMatch other = (BowlingMatch) obj;
             return Objects.equals(title, other.title) && year.equals(other.year);
         }
     }
