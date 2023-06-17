@@ -2,7 +2,6 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,23 +13,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.uniroma3.siw.controller.validator.BowlingAlleyValidator;
+import it.uniroma3.siw.controller.validator.BowlingMatchValidator;
 import it.uniroma3.siw.model.Reservation;
 import it.uniroma3.siw.model.BowlingMatch;
 import it.uniroma3.siw.repository.ReservationRepository;
-import it.uniroma3.siw.repository.BowlingAlleyRepository;
+import it.uniroma3.siw.repository.BowlingMatchRepository;
 import jakarta.validation.Valid;
 
 @Controller
 public class BowlingMatchController {
 	@Autowired 
-	private BowlingAlleyRepository bowlingAlleyRepository;
+	private BowlingMatchRepository bowlingAlleyRepository;
 	
 	@Autowired 
 	private ReservationRepository reservationRepository;
 
 	@Autowired 
-	private BowlingAlleyValidator bowlingAlleyValidator;
+	private BowlingMatchValidator bowlingMatchValidator;
 
 	@GetMapping(value="/admin/formNewMovie")
 	public String formNewMovie(Model model) {
@@ -55,18 +54,6 @@ public class BowlingMatchController {
 		return "admin/manageMovies.html";
 	}
 	
-	@GetMapping(value="/admin/setDirectorToMovie/{directorId}/{movieId}")
-	public String setDirectorToMovie(@PathVariable("directorId") Long directorId, @PathVariable("movieId") Long movieId, Model model) {
-		
-		Reservation director = this.reservationRepository.findById(directorId).get();
-		BowlingMatch movie = this.bowlingAlleyRepository.findById(movieId).get();
-		movie.setDirector(director);
-		this.bowlingAlleyRepository.save(movie);
-		
-		model.addAttribute("movie", movie);
-		return "admin/formUpdateMovie.html";
-	}
-	
 	
 	@GetMapping(value="/admin/addDirector/{id}")
 	public String addDirector(@PathVariable("id") Long id, Model model) {
@@ -78,7 +65,7 @@ public class BowlingMatchController {
 	@PostMapping("/admin/movie")
 	public String newMovie(@Valid @ModelAttribute("movie") BowlingMatch movie, BindingResult bindingResult, Model model) {
 		
-		this.bowlingAlleyValidator.validate(movie, bindingResult);
+		this.bowlingMatchValidator.validate(movie, bindingResult);
 		if (!bindingResult.hasErrors()) {
 			this.bowlingAlleyRepository.save(movie); 
 			model.addAttribute("movie", movie);
@@ -120,38 +107,8 @@ public class BowlingMatchController {
 
 		return "admin/actorsToAdd.html";
 	}
-
-	@GetMapping(value="/admin/addActorToMovie/{actorId}/{movieId}")
-	public String addActorToMovie(@PathVariable("actorId") Long actorId, @PathVariable("movieId") Long movieId, Model model) {
-		BowlingMatch movie = this.bowlingAlleyRepository.findById(movieId).get();
-		Reservation actor = this.reservationRepository.findById(actorId).get();
-		Set<Reservation> actors = movie.getActors();
-		actors.add(actor);
-		this.bowlingAlleyRepository.save(movie);
-		
-		List<Reservation> actorsToAdd = actorsToAdd(movieId);
-		
-		model.addAttribute("movie", movie);
-		model.addAttribute("actorsToAdd", actorsToAdd);
-
-		return "admin/actorsToAdd.html";
-	}
 	
-	@GetMapping(value="/admin/removeActorFromMovie/{actorId}/{movieId}")
-	public String removeActorFromMovie(@PathVariable("actorId") Long actorId, @PathVariable("movieId") Long movieId, Model model) {
-		BowlingMatch movie = this.bowlingAlleyRepository.findById(movieId).get();
-		Reservation actor = this.reservationRepository.findById(actorId).get();
-		Set<Reservation> actors = movie.getActors();
-		actors.remove(actor);
-		this.bowlingAlleyRepository.save(movie);
 
-		List<Reservation> actorsToAdd = actorsToAdd(movieId);
-		
-		model.addAttribute("movie", movie);
-		model.addAttribute("actorsToAdd", actorsToAdd);
-
-		return "admin/actorsToAdd.html";
-	}
 
 	private List<Reservation> actorsToAdd(Long movieId) {
 		List<Reservation> actorsToAdd = new ArrayList<>();

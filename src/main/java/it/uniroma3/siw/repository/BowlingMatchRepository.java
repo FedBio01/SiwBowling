@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.siw.model.BowlingMatch;
 
-public interface BowlingAlleyRepository extends CrudRepository<BowlingMatch, Long> {
+public interface BowlingMatchRepository extends CrudRepository<BowlingMatch, Long> {
 
 	public List<BowlingMatch> findByYear(int year);
 
