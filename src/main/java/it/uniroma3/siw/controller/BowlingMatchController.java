@@ -22,7 +22,7 @@ import it.uniroma3.siw.repository.BowlingAlleyRepository;
 import jakarta.validation.Valid;
 
 @Controller
-public class BowlingAlleyController {
+public class BowlingMatchController {
 	@Autowired 
 	private BowlingAlleyRepository bowlingAlleyRepository;
 	

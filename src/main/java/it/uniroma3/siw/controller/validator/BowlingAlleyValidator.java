@@ -25,5 +25,4 @@ public class BowlingAlleyValidator implements Validator {
 	public boolean supports(Class<?> aClass) {
 		return BowlingMatch.class.equals(aClass);
 	}
-	//validatorrr
 }

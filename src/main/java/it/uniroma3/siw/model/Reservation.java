@@ -79,12 +79,5 @@ public class Reservation {
 				&& Objects.equals(numberOfPlayers, other.numberOfPlayers)
 				&& Objects.equals(reservationDate, other.reservationDate);
 	}
-	
-	
-	
-	
-
-
-
 
 }
