@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		New Review
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+
+<body>
+		
+	
+	<div class="login-form"> 
+	<form th:action="@{/registeredUser/reservation}" method="POST" th:object="${reservation}">
+  		<h1 class="title">Aggiungi una prenotazione: </h1> 
+  		<div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		<div class="input-container">
+			<div class="input-element">
+				<span><input placeholder="Numero di giocatori" type="text" th:field="${reservation.numberOfPlayers}" required /></span>
+		    	<span th:if="${#fields.hasErrors('numberOfPlayers')}" th:errors="*{numberOfPlayers}">
+		   		</span>
+			</div>
+
+		<div class="input-element">
+			<Label>Data di prenotazione:</Label>
+			<span><input type="datetime-local" pattern = "yyyy-MM-dd HH" th:field="${reservation.reservationDate}" /></span>
+		    <span th:if="${#fields.hasErrors('reservationDate')}" th:errors="*{reservationDate}">
+		    </span>
+		</div>
+		
+		<div class="input-element">
+			<Label>Orario di prenotazione:</Label>
+			<span><input type="time" th:field="${reservation.reservationTime}" /></span>
+		    <span th:if="${#fields.hasErrors('reservationTime')}" th:errors="*{reservationTime}">
+		    </span>
+		</div>
+
+    	</div>
+		
+		<div class="input-btn">
+			<span><button type="submit" class="sign-in-btn">Conferma</button></span>
+		</div>
+	</form>
+	</div>
+</body>
+
+</html>
