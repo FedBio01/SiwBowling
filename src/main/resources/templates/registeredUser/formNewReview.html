@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Add Review
+	</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+<link rel="stylesheet" href="../lib/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></head>
+
+<body>
+	<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+	
+	
+	<div>
+	<h2>Aggiungi una recensione alla struttura</h2>
+	<form th:action="@{'/registered/review/'}" method="POST" th:object="${review}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		<div>
+			
+			<input type="text" th:field="${review.title}" required/>
+			<label>Titolo:</label>
+			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+		    </span>
+		</div>
+		<div>
+			<input type="number" th:field="${review.rating}" required/>
+			<label>Valutazione [1-5]:</label> 
+			<span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
+		    </span>
+		</div>
+		<div>
+			 <input type="text" th:field="${review.text}" required/>
+			 <label>Testo:</label>
+		</div>
+     
+      <button type="submit">Conferma</button>
+
+	</form>
+	</div>
+</body>
+
+</html>

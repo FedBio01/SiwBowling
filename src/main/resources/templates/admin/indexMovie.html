@@ -10,14 +10,19 @@
 
 <body>
 	<header>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails.username}"></span>
-			<a href="/logout">Logout</a>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
 		</div>
-		<div th:unless="${user}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+	</div>
+</header>
 
 	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
 	<h1>Gestione Film</h1>
