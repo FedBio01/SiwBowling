@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.uniroma3.siw.model.BowlingAlley;
+import it.uniroma3.siw.model.BowlingMatch;
 
-public interface BowlingAlleyRepository extends CrudRepository<BowlingAlley, Long> {
+public interface BowlingAlleyRepository extends CrudRepository<BowlingMatch, Long> {
 
-	public List<BowlingAlley> findByYear(int year);
+	public List<BowlingMatch> findByYear(int year);
 
 	public boolean existsByTitleAndYear(String title, int year);	
 }

@@ -67,4 +67,3 @@ public class BowlingMatch {
 			return Objects.equals(alleyNumber, other.alleyNumber) && Objects.equals(reservation, other.reservation);
 		}
 }
-        
