@@ -11,13 +11,13 @@ import it.uniroma3.siw.repository.BowlingAlleyRepository;
 @Component
 public class BowlingAlleyValidator implements Validator {
 	@Autowired
-	private BowlingAlleyRepository movieRepository;
+	private BowlingAlleyRepository bowlingAlleyRepository;
 
 	@Override
 	public void validate(Object o, Errors errors) {
 		BowlingAlley movie = (BowlingAlley)o;
 		if (movie.getTitle()!=null && movie.getYear()!=null 
-				&& movieRepository.existsByTitleAndYear(movie.getTitle(), movie.getYear())) {
+				&& bowlingAlleyRepository.existsByTitleAndYear(movie.getTitle(), movie.getYear())) {
 			errors.reject("movie.duplicate");
 		}
 	}
