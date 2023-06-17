@@ -23,7 +23,7 @@ public class BowlingMatch {
         @Max(5)
         private Integer alleyNumber;
         
-        @OneToOne
+        @OneToOne(mappedBy="bowlingMatch")
         private Reservation reservation;
 
 		public Long getId() {

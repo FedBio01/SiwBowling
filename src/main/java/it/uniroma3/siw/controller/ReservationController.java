@@ -14,41 +14,4 @@ import it.uniroma3.siw.repository.ReservationRepository;
 @Controller
 public class ReservationController {
 	
-	@Autowired 
-	private ReservationRepository reservationRepository;
-
-	@GetMapping(value="/admin/formNewArtist")
-	public String formNewArtist(Model model) {
-		model.addAttribute("artist", new Reservation());
-		return "admin/formNewArtist.html";
-	}
-	
-	@GetMapping(value="/admin/indexArtist")
-	public String indexArtist() {
-		return "admin/indexArtist.html";
-	}
-	
-	@PostMapping("/admin/artist")
-	public String newArtist(@ModelAttribute("artist") Reservation artist, Model model) {
-		if (!reservationRepository.existsByNameAndSurname(artist.getName(), artist.getSurname())) {
-			this.reservationRepository.save(artist); 
-			model.addAttribute("artist", artist);
-			return "artist.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo artista esiste già");
-			return "admin/formNewArtist.html"; 
-		}
-	}
-
-	@GetMapping("/artist/{id}")
-	public String getArtist(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("artist", this.reservationRepository.findById(id).get());
-		return "artist.html";
-	}
-
-	@GetMapping("/artist")
-	public String getArtists(Model model) {
-		model.addAttribute("artists", this.reservationRepository.findAll());
-		return "artists.html";
-	}
 }

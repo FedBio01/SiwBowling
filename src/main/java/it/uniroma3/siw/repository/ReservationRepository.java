@@ -9,15 +9,6 @@ import it.uniroma3.siw.model.Reservation;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Long> {
 
-	public boolean existsByNameAndSurname(String name, String surname);	
-
-	@Query(value="select * "
-			+ "from artist a "
-			+ "where a.id not in "
-			+ "(select actors_id "
-			+ "from movie_actors "
-			+ "where movie_actors.starred_movies_id = :movieId)", nativeQuery=true)
-	public Iterable<Reservation> findActorsNotInMovie(@Param("movieId") Long id);
 
 
 }
