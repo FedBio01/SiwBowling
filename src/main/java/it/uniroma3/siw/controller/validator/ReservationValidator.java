@@ -6,20 +6,23 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.model.Reservation;
-import it.uniroma3.siw.repository.ReservationRepository;
+import static it.uniroma3.siw.model.Reservation.TOTAL_BOWLING_ALLEY;
+import it.uniroma3.siw.service.ReservationService;
 
 @Component
 public class ReservationValidator implements Validator {
 	
 	@Autowired
-	private ReservationRepository reservationRepository;
+	private ReservationService reservationService;
 	
 	@Override
 	public void validate(Object o, Errors errors) {
 		Reservation reservation = (Reservation)o;
-		if (reservation.getReservationDate()!=null 
-				&& reservationRepository.existsByReservationDate(reservation.getReservationDate())) {
-			errors.reject("reservation.duplicate ");
+		if (reservation.getReservationDate()!=null && reservation.getReservationTime()!=null
+				&& reservationService.findReservationsByDateAndTime(reservation.getReservationDate(), reservation.getReservationTime())
+				.size()>=TOTAL_BOWLING_ALLEY)
+				 {
+			errors.reject("reservation.duplicate");
 		}
 	}
 	

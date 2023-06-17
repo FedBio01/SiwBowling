@@ -1,8 +1,6 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Reservation {
@@ -24,21 +23,21 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+	@NotNull
 	@Min(1)
 	@Max(10)
 	private Integer numberOfPlayers;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH")
-	private LocalDateTime reservationDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate reservationDate;
 	
-	@DateTimeFormat(pattern = "HH")
-	private LocalTime reservationTime;
+	private String reservationTime;
 	
-	public LocalTime getReservationTime() {
+	public String getReservationTime() {
 		return reservationTime;
 	}
 
-	public void setReservationTime(LocalTime reservationTime) {
+	public void setReservationTime(String reservationTime) {
 		this.reservationTime = reservationTime;
 	}
 
@@ -70,17 +69,17 @@ public class Reservation {
 	}
 	
 	
-	public LocalDateTime getReservationDate() {
+	public LocalDate getReservationDate() {
 		return reservationDate;
 	}
 	
-	public void setReservationDate(LocalDateTime reservationDate) {
+	public void setReservationDate(LocalDate reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bowlingMatch, numberOfPlayers, reservationDate);
+		return Objects.hash(bowlingMatch, numberOfPlayers, reservationDate, reservationTime);
 	}
 
 	@Override
@@ -94,7 +93,8 @@ public class Reservation {
 		Reservation other = (Reservation) obj;
 		return Objects.equals(bowlingMatch, other.bowlingMatch)
 				&& Objects.equals(numberOfPlayers, other.numberOfPlayers)
-				&& Objects.equals(reservationDate, other.reservationDate);
+				&& Objects.equals(reservationDate, other.reservationDate)
+				&& Objects.equals(reservationTime, other.reservationTime);
 	}
 
 }
