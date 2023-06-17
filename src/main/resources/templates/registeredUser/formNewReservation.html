@@ -43,16 +43,24 @@
 
 		<div class="input-element">
 			<Label>Data di prenotazione:</Label>
-			<span><input type="datetime-local" pattern = "yyyy-MM-dd HH" th:field="${reservation.reservationDate}" /></span>
+			<span><input type="date" pattern = "yyyy-MM-dd" th:field="${reservation.reservationDate}" /></span>
 		    <span th:if="${#fields.hasErrors('reservationDate')}" th:errors="*{reservationDate}">
 		    </span>
 		</div>
 		
 		<div class="input-element">
 			<Label>Orario di prenotazione:</Label>
-			<span><input type="time" th:field="${reservation.reservationTime}" /></span>
-		    <span th:if="${#fields.hasErrors('reservationTime')}" th:errors="*{reservationTime}">
-		    </span>
+			<select class="input-element" name="times" th:field="${reservation.reservationTime}">
+    			<option value="">--Scegli uno dei seguenti orari--</option>
+    			<option value="09:00">09:00</option>
+   				<option value="10:00">10:00</option>
+   				<option value="11:00">11:00</option>
+    			<option value="12:00">12:00</option>
+    			<option value="13:00">13:00</option>
+    			<option value="14:00">14:00</option>
+			</select>
+		  
+		  
 		</div>
 
     	</div>
