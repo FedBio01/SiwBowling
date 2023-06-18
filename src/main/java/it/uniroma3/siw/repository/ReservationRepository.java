@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import it.uniroma3.siw.model.Reservation;
-import it.uniroma3.siw.model.Review;
+
 
 public interface ReservationRepository extends CrudRepository<Reservation, Long> {
 

@@ -1,7 +1,5 @@
 package it.uniroma3.siw.controller.validator;
 
-import static it.uniroma3.siw.model.Reservation.TOTAL_BOWLING_ALLEY;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -27,7 +25,6 @@ public class ReservationValidator implements Validator {
 		}
 		
 	}
-	
 	@Override
 	public boolean supports(Class<?> aClass) {
 		return Reservation.class.equals(aClass);
