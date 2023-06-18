@@ -1,5 +1,8 @@
 package it.uniroma3.siw.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +23,10 @@ public class BowlingAlleyService {
 	public boolean existsByAlleyNumber(Integer alleyNumber) {
 		return this.bowlingAlleyRepository.existsByAlleyNumber(alleyNumber);
 	}
+	
+	public List<BowlingAlley> alleysNotReserved(LocalDate reservationDate,String reservationTime){
+		return (List<BowlingAlley>) this.bowlingAlleyRepository.findAlleysNotReserved(reservationDate, reservationTime);
+	}
+	
 
 }

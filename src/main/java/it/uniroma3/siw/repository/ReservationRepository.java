@@ -18,7 +18,7 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 	@Query(value="select * "
 			+ "from reservation r "
 			+ "where reservation_date = :reservationDate "
-			+ "and reservation_time = :reservationTime ", nativeQuery=true)
+			+ " and reservation_time = :reservationTime ", nativeQuery=true)
 	public Iterable<Reservation> findReservationsByDayAndTime(@Param("reservationDate") LocalDate reservationDate,
 			@Param("reservationTime") String reservationTime);
 	

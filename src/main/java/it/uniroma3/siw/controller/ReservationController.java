@@ -1,5 +1,9 @@
 package it.uniroma3.siw.controller;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validator.ReservationValidator;
+import it.uniroma3.siw.model.BowlingAlley;
 import it.uniroma3.siw.model.Reservation;
+import it.uniroma3.siw.service.BowlingAlleyService;
 import it.uniroma3.siw.service.ReservationService;
 import jakarta.validation.Valid;
 
@@ -19,6 +25,9 @@ public class ReservationController {
 
 	@Autowired 
 	private ReservationService reservationService;
+	
+	@Autowired 
+	private BowlingAlleyService bowlingAlleyService;
 	
 	@Autowired 
 	private ReservationValidator reservationValidator;;
@@ -38,9 +47,13 @@ public class ReservationController {
 	public String newReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, Model model) {
 		this.reservationValidator.validate(reservation, bindingResult);
 		if (!bindingResult.hasErrors()) {
+			List<BowlingAlley> alleysNotReserved = this.bowlingAlleyService.alleysNotReserved(reservation.getReservationDate(), reservation.getReservationTime());
+			Collections.shuffle(alleysNotReserved);
+			BowlingAlley alleyNotReserved = alleysNotReserved.get(0);
+			reservation.setBowlingAlley(alleyNotReserved);
 			this.reservationService.saveReservation(reservation); 
 			model.addAttribute("reservation", reservation);
-			return "reservation.html";
+			return "registeredUser/reservationSuccessful.html";
 		} else {
 			return "registeredUser/formNewReservation.html"; 
 		}

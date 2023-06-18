@@ -53,12 +53,12 @@ public class Reservation {
 		this.numberOfPlayers = numberOfPlayers;
 	}
 
-	public BowlingAlley getBowlingMatch() {
+	public BowlingAlley getBowlingAlley() {
 		return bowlingAlley;
 	}
 
-	public void setBowlingMatch(BowlingAlley bowlingMatch) {
-		this.bowlingAlley = bowlingMatch;
+	public void setBowlingAlley(BowlingAlley bowlingAlley) {
+		this.bowlingAlley = bowlingAlley;
 	}
 
 	public Long getId() {

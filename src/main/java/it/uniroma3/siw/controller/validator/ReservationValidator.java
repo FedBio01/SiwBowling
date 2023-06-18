@@ -1,29 +1,31 @@
 package it.uniroma3.siw.controller.validator;
 
+import static it.uniroma3.siw.model.Reservation.TOTAL_BOWLING_ALLEY;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import it.uniroma3.siw.model.Reservation;
-import static it.uniroma3.siw.model.Reservation.TOTAL_BOWLING_ALLEY;
-import it.uniroma3.siw.service.ReservationService;
+import it.uniroma3.siw.service.BowlingAlleyService;
 
 @Component
 public class ReservationValidator implements Validator {
 	
 	@Autowired
-	private ReservationService reservationService;
+	private BowlingAlleyService bowlingAlleyService;
 	
 	@Override
 	public void validate(Object o, Errors errors) {
 		Reservation reservation = (Reservation)o;
 		if (reservation.getReservationDate()!=null && reservation.getReservationTime()!=null
-				&& reservationService.findReservationsByDateAndTime(reservation.getReservationDate(), reservation.getReservationTime())
-				.size()>=TOTAL_BOWLING_ALLEY)
+				&& bowlingAlleyService.alleysNotReserved(reservation.getReservationDate(), reservation.getReservationTime())
+				.size()==0)
 				 {
 			errors.reject("reservation.duplicate");
 		}
+		
 	}
 	
 	@Override
