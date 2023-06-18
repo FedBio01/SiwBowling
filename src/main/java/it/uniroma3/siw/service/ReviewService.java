@@ -24,6 +24,10 @@ public class ReviewService {
 		return this.reviewRepository.save(review);
 	}
 	
+	public List<Review> findAllReviews(){
+		return (List<Review>) this.reviewRepository.findAll();
+	}
+	
 	public Review findReviewById(Long id) {
 		return this.reviewRepository.findById(id).get();
 	}
@@ -34,6 +38,11 @@ public class ReviewService {
 		user.setReview(review);
 		review.setUser(user);
 		return this.reviewRepository.save(review);
+	}
+
+	public void deleteReview(Long reviewId) {
+		this.reviewRepository.delete(this.findReviewById(reviewId));
+		
 	}
 
 }

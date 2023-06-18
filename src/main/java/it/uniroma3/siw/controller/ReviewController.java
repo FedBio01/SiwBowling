@@ -51,4 +51,23 @@ public class ReviewController {
 		}
 	}
 	
+	@GetMapping("/reviews")
+	public String reviews(Model model) {
+		model.addAttribute("reviews", this.reviewService.findAllReviews());
+		return "/reviews";
+	}
+	
+	@GetMapping("/admin/reviewsToDelete")
+	public String reviewsToDelete(Model model) {
+		model.addAttribute("reviews", this.reviewService.findAllReviews());
+		return "/admin/reviewsToDelete";
+	}
+	
+	@GetMapping(value = "/deleteReview/{reviewId}")
+	public String deleteReview (Model model, @PathVariable("reviewId") Long reviewId) {
+		this.reviewService.deleteReview(reviewId);
+		model.addAttribute("reviews",this.reviewService.findAllReviews());
+		return "/admin/reviewsToDelete.html";
+	}
+	
 }

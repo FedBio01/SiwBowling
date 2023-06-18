@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reviews to delete</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<body>
+	<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+	
+	<div class="archivio">
+	<h2 th:if="${reviews==null || reviews.isEmpty()}">Non ci sono recensioni nel sistema</h2>
+    <ul style= "height: 300px; overflow-y: scroll;">
+		<li class="list-element"  th:each="review : ${reviews}">
+    		<div th:if="${review}">
+				<h2>Recensione di <span th:text="${review.user.name} + ' ' + ${review.user.surname} "> Mario Rossi </span> </h2>
+				<h4> Titolo: <span th:text="${review.title}">bello</span> </h4>
+				<h4> Valutazione: <span th:text="${review.rating}">5</span> </h4>
+				<h4> Testo: <span th:text="${review.text}">molto scorrevole</span> </h4>
+				<h4> <a th:href="@{'/deleteReview' + '/' + ${review.id}}">Elimina</a></h4>
+    		</div>
+    		<div th:unless="${review}">Non esiste</div>
+		</li>
+    </ul>
+    </div>
+  </body>
+</html>
+
