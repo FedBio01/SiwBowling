@@ -3,11 +3,11 @@
 
 <head>
 	<title>
-		SiwMovie - Homepage
+		Add Notice
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
+	<link rel="stylesheet" href="../lib/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></head>
 
 <body>
 	<header>
@@ -24,25 +24,24 @@
 		</div>
 	</div>
 </header>
-
-	<h1>Consulta l'archivio</h1>
-	<div>
-		<a href="/movie">Elenco Film</a>
-	</div>
-	<div>
-		<a href="/artist">Elenco Artisti</a>
-	</div>
 	
-	<h1>Avvisi</h1>
-	<div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
-	<ul style= "height: 100px; overflow-y: scroll;">
-		<li th:each="notice : ${notices}">
-			<h3 th:text="${notice.title}"></h3>
-			<div>
-				<span th:text="${notice.description}"></span>
-			</div>
-		</li>
-	</ul>
+	
+	<div>
+	<h2>Aggiungi un avviso</h2>
+	<form th:action="@{'/admin/notice'}" method="POST" th:object="${review}">
+		<div>
+			<label>Titolo:</label>
+			<input type="text" th:field="${notice.title}" required/>
+		</div>
+		<div>
+			<label>Descrizione:</label>
+			<input type="text" th:field="${notice.description}" required/>
+		</div>
+     
+      <button type="submit">Conferma</button>
+
+	</form>
+	</div>
 </body>
 
 </html>

@@ -2,12 +2,10 @@
 <html>
 
 <head>
-	<title>
-		SiwMovie - Homepage
-	</title>
+	<title>Avviso inserito</title>
 	<link rel="stylesheet" href="/css/stile.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
+	<link rel="stylesheet" href="../lib/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></head>
 
 <body>
 	<header>
@@ -25,24 +23,18 @@
 	</div>
 </header>
 
-	<h1>Consulta l'archivio</h1>
 	<div>
-		<a href="/movie">Elenco Film</a>
+	<h1>Ecco il nuovo avviso:</h1>
+	<div>
+		<h2>Titolo: </h2>
+		<h3 th:text="${notice.title}"></h3>
 	</div>
 	<div>
-		<a href="/artist">Elenco Artisti</a>
+		<h2>Descrizione: </h2>
+		<h3 th:text="${notice.description}"></h3>
 	</div>
-	
-	<h1>Avvisi</h1>
-	<div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
-	<ul style= "height: 100px; overflow-y: scroll;">
-		<li th:each="notice : ${notices}">
-			<h3 th:text="${notice.title}"></h3>
-			<div>
-				<span th:text="${notice.description}"></span>
-			</div>
-		</li>
-	</ul>
+	<button>
+		<a th:href="@{'/'}">Torna alla home</a>
+	</button>
 </body>
-
 </html>

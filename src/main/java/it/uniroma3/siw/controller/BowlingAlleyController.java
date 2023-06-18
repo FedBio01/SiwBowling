@@ -52,7 +52,12 @@ public class BowlingAlleyController {
 		else {
 			return "admin/formNewBowlingAlley.html";
 		}
-		
+	}
+	
+	@GetMapping("/admin/bowlingAlleys")
+	public String bowlingAlleys(Model model) {
+		model.addAttribute("bowlingAlleys", this.bowlingAlleyService.findAllBowlingAlleys());
+		return "admin/bowlingAlleys.html";
 	}
 }
 
