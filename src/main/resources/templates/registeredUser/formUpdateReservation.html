@@ -23,30 +23,44 @@
 	</div>
 </header>
 
+
+<div class= "login-box" style= "height: 80%; overflow-y: scroll;">
+	<h1>Aggiorna prenotazione</h1>
 	<div>
-	
-	<h1>Ecco la tua prenotazione:</h1>
-	<div>
-		<h2>Numero di giocatori: </h2>
-		<h3 th:text="${reservation.numberOfPlayers}"></h3>
-		<span> <a th:href="@{'/registeredUser/formUpdateNumberOfPlayers' + '/' + ${reservation.id}}">Aggiorna</a></span>
-	</div>
-	<div>
-		<h2>Data: </h2>
-		<h3 th:text="${reservation.reservationDate}"></h3>
-		<span> <a th:href="@{'/registeredUser/formUpdateReservationDate' + '/' + ${reservation.id}}">Aggiorna</a></span>
-	</div>
-	<div>
-		<h2>Orario: </h2>
-		<h3 th:text="${reservation.reservationTime}"></h3>
-		<span> <a th:href="@{'/registeredUser/formUpdateReservationTime' + '/' + ${reservation.id}}">Aggiorna</a></span>
-	</div>
-	<div>
-		<h2>Numero di pista: </h2>
-		<h3 th:text="${reservation.bowlingAlley.getAlleyNumber()}"></h3>
-	</div>
-	<button>
-		<a th:href="@{'/'}">Torna alla home</a>
-	</button>
+		<form th:action="@{'/registeredUser/updateReservation/' + ${reservation.id}}" method="POST" th:object="${reservation}">
+			<div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
+  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  			</div>
+			<div>
+			<label>Numero di giocatori: </label>
+			<input type="text" th:field="${reservation.numberOfPlayers}" required/>
+			<span th:if="${#fields.hasErrors('numberOfPlayers')}" th:errors="*{numberOfPlayers}">
+			</div>
+			
+			<div>
+			<label>Data: </label>
+			<input type="date" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" pattern="yyyy-MM-dd" th:field="${reservation.reservationDate}" required/>
+			<span th:if="${#fields.hasErrors('reservationDate')}" th:errors="*{reservationDate}">
+			</div>
+			
+			<div>
+				<label>Orario: </label>
+				<select class="input-element" name="times" th:field="${reservation.reservationTime}" required>
+    				<option value="">--Scegli uno dei seguenti orari--</option>
+    				<option value="14:00">14:00</option>
+   					<option value="15:00">15:00</option>
+   					<option value="16:00">16:00</option>
+    				<option value="17:00">17:00</option>
+    				<option value="18:00">18:00</option>
+    				<option value="19:00">19:00</option>
+    				<option value="20:00">20:00</option>
+   					<option value="21:00">21:00</option>
+   					<option value="22:00">22:00</option>
+    				<option value="23:00">23:00</option>
+			</select>
+			</div>	
+
+      		<button type="submit">Conferma</button>
+		</form>
 </body>
 </html>

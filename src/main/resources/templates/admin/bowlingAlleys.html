@@ -28,7 +28,7 @@
 	<div th:if="${bowlingAlleys==null || bowlingAlleys.isEmpty()}">Non ci sono piste nel sistema</div>
 	<ul>
 		<li th:each="alley : ${bowlingAlleys}">
-			<div th:text="'Numero di pista :'+${alley.alleyNumber}"></div>
+			<div th:text="'Numero di pista: '+${alley.alleyNumber}"></div>
 		</li>
 	</ul>
 </body>

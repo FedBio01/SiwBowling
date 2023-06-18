@@ -96,8 +96,32 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/registeredUser/formUpdateReservation/{reservationId}")
-	public String updateReservation(Model model, @PathVariable("reservationId") Long reservationId) {
+	public String formUpdateReservation(Model model, @PathVariable("reservationId") Long reservationId) {
 		model.addAttribute("reservation", this.reservationService.findReservationById(reservationId));
 		return "/registeredUser/formUpdateReservation.html";
+	}
+	
+	@PostMapping("/registeredUser/updateReservation/{reservationId}")
+	public String updateReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, Model model, @PathVariable("reservationId") Long reservationId) {
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+		this.reservationValidator.validate(reservation, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			List<BowlingAlley> alleysNotReserved = this.bowlingAlleyService.alleysNotReserved(reservation.getReservationDate(), reservation.getReservationTime());
+			Collections.shuffle(alleysNotReserved);
+			BowlingAlley alleyNotReserved = alleysNotReserved.get(0);
+			reservation.setBowlingAlley(alleyNotReserved);
+			Reservation realReservation = this.reservationService.findReservationById(reservationId);
+			realReservation.setBowlingAlley(reservation.getBowlingAlley());
+			realReservation.setNumberOfPlayers(reservation.getNumberOfPlayers());
+			realReservation.setReservationDate(reservation.getReservationDate());
+			realReservation.setReservationTime(reservation.getReservationTime());
+			this.reservationService.saveReservation(realReservation);
+			this.reservationService.saveReservationToUser(credentials.getUser().getId(),realReservation.getId()); 
+			model.addAttribute("reservation", realReservation);
+			return "registeredUser/reservationSuccessful.html";
+		} else {
+			return "registeredUser/manageReservations.html"; 
+		}
 	}
 }
