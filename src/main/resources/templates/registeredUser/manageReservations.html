@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Manage reservations</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<body>
+	<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+
+	
+	<h1>Le tue prenotazioni: </h1>
+	<div th:if="${reservations.isEmpty()}">Non hai alcuna prenotazione a tuo nome!</div>
+	<ul>
+		<li th:each="reservation : ${reservations}">
+			<span th:text="${reservation.reservationDate} + ' (' + ${reservation.reservationTime} + ')'">25/12/2023 (10:00)</span>
+			<a th:href="@{'/registeredUser/formUpdateReservation' + '/' + ${reservation.id}}">Aggiorna</a>
+			<a th:href="@{'/registeredUser/deleteReservation' + '/' + ${reservation.id}}">Elimina</a>
+		</li>
+	</ul>
+</body>
+
+</html>

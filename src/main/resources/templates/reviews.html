@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwMovie - Registrazione conclusa</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<body>
+	<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+
+	
+	<h1>Ecco le recensioni: </h1>
+	<div th:if="${reviews==null || reviews.isEmpty()}">Non ci sono recensioni nel sistema</div>
+	<ul>
+		<li th:each="review : ${reviews}">
+			<h2 th:text="'Recensione di ' + ${review.user.getName()} + ' ' +  ${review.user.getSurname()}"></h2>
+			<div>
+				<span>Titolo: </span>
+				<span th:text="${review.title}"></span>
+			</div>
+			<div>
+				<span>Testo: </span>
+				<span th:text="${review.text}"></span>
+			</div>
+			<div>
+				<span>Valutazione: </span>
+				<span th:text="${review.rating}"></span>
+			</div>
+		</li>
+	</ul>
+</body>
+</html>

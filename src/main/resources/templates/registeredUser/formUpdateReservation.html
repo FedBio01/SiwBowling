@@ -29,14 +29,17 @@
 	<div>
 		<h2>Numero di giocatori: </h2>
 		<h3 th:text="${reservation.numberOfPlayers}"></h3>
+		<span> <a th:href="@{'/registeredUser/formUpdateNumberOfPlayers' + '/' + ${reservation.id}}">Aggiorna</a></span>
 	</div>
 	<div>
 		<h2>Data: </h2>
 		<h3 th:text="${reservation.reservationDate}"></h3>
+		<span> <a th:href="@{'/registeredUser/formUpdateReservationDate' + '/' + ${reservation.id}}">Aggiorna</a></span>
 	</div>
 	<div>
 		<h2>Orario: </h2>
 		<h3 th:text="${reservation.reservationTime}"></h3>
+		<span> <a th:href="@{'/registeredUser/formUpdateReservationTime' + '/' + ${reservation.id}}">Aggiorna</a></span>
 	</div>
 	<div>
 		<h2>Numero di pista: </h2>

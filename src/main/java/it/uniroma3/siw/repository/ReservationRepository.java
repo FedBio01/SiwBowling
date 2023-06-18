@@ -2,6 +2,7 @@ package it.uniroma3.siw.repository;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +22,11 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 			+ " and reservation_time = :reservationTime ", nativeQuery=true)
 	public Iterable<Reservation> findReservationsByDayAndTime(@Param("reservationDate") LocalDate reservationDate,
 			@Param("reservationTime") String reservationTime);
+
+	@Query(value="select * "
+			+ "from reservation r "
+			+ "where user_id = :userId ", nativeQuery=true)
+	public List<Reservation> findReservationsByuserId(@Param("userId") Long userid);
 	
 	
 

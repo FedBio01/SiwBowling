@@ -2,9 +2,10 @@ package it.uniroma3.siw.controller;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validator.ReservationValidator;
 import it.uniroma3.siw.model.BowlingAlley;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Reservation;
 import it.uniroma3.siw.service.BowlingAlleyService;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.ReservationService;
 import jakarta.validation.Valid;
 
@@ -25,6 +28,9 @@ public class ReservationController {
 
 	@Autowired 
 	private ReservationService reservationService;
+	
+	@Autowired 
+	private CredentialsService credentialsService;
 	
 	@Autowired 
 	private BowlingAlleyService bowlingAlleyService;
@@ -45,13 +51,16 @@ public class ReservationController {
 	
 	@PostMapping("/registeredUser/reservation")
 	public String newReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, Model model) {
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 		this.reservationValidator.validate(reservation, bindingResult);
 		if (!bindingResult.hasErrors()) {
 			List<BowlingAlley> alleysNotReserved = this.bowlingAlleyService.alleysNotReserved(reservation.getReservationDate(), reservation.getReservationTime());
 			Collections.shuffle(alleysNotReserved);
 			BowlingAlley alleyNotReserved = alleysNotReserved.get(0);
 			reservation.setBowlingAlley(alleyNotReserved);
-			this.reservationService.saveReservation(reservation); 
+			this.reservationService.saveReservation(reservation);
+			this.reservationService.saveReservationToUser(credentials.getUser().getId(),reservation.getId()); 
 			model.addAttribute("reservation", reservation);
 			return "registeredUser/reservationSuccessful.html";
 		} else {
@@ -69,5 +78,26 @@ public class ReservationController {
 	public String getReservations(Model model) {
 		model.addAttribute("reservations", this.reservationService.findAllReservations());
 		return "reservations.html";
+	}
+	
+	@GetMapping("registeredUser/manageReservations")
+	public String getReservationsByUser(Model model) {
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+		model.addAttribute("reservations", this.reservationService.findReservationsByUser(credentials.getUser().getId()));
+		return "registeredUser/manageReservations.html";
+	}
+	
+	@GetMapping(value = "registeredUser/deleteReservation/{reservationId}")
+	public String deleteReservation (Model model, @PathVariable("reservationId") Long reservationId) {
+		this.reservationService.deleteReservation(reservationId);
+		model.addAttribute("reservations",this.reservationService.findAllReservations());
+		return "/registeredUser/manageReservations.html";
+	}
+	
+	@GetMapping("/registeredUser/formUpdateReservation/{reservationId}")
+	public String updateReservation(Model model, @PathVariable("reservationId") Long reservationId) {
+		model.addAttribute("reservation", this.reservationService.findReservationById(reservationId));
+		return "/registeredUser/formUpdateReservation.html";
 	}
 }
