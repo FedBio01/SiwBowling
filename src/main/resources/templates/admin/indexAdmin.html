@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		SiwMovie - Homepage
+		SiwBowling - Homepage
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -26,9 +26,7 @@
 	</div>
 </header>
 
-	<div><img src="/images/logo-siw.png" width="50%" /></div>
 	<h1>Consulta l'archivio</h1>
-	
 	
 	<div>
 		<a href="/admin/bowlingAlleys">Piste della struttura</a>
@@ -49,6 +47,17 @@
 	<div>
 		<a href="/admin/newNotice">Inserisci un nuovo avviso</a>
 	</div>
+	
+	<h1>Avvisi</h1>
+	<div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
+	<ul style= "height: 100px; overflow-y: scroll;">
+		<li th:each="notice : ${notices}">
+			<h3 th:text="${notice.title}"></h3>
+			<div>
+				<span th:text="${notice.description}"></span>
+			</div>
+		</li>
+	</ul>
 </body>
 
 </html>

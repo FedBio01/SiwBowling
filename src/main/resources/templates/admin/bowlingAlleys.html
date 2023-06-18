@@ -2,10 +2,9 @@
 <html>
 
 <head>
-	<title>
-		SiwMovie - Homepage
-	</title>
+	<title>BowlingAlleys</title>
 	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 
@@ -25,22 +24,11 @@
 	</div>
 </header>
 
-	<h1>Consulta l'archivio</h1>
-	<div>
-		<a href="/reviews">Ecco le nostre recensioni</a>
-	</div>
-	<div>
-		<a href="/artist">Elenco Artisti</a>
-	</div>
-	
-	<h1>Avvisi</h1>
-	<div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
-	<ul style= "height: 100px; overflow-y: scroll;">
-		<li th:each="notice : ${notices}">
-			<h3 th:text="${notice.title}"></h3>
-			<div>
-				<span th:text="${notice.description}"></span>
-			</div>
+	<h1>Piste della struttura</h2>
+	<div th:if="${bowlingAlleys==null || bowlingAlleys.isEmpty()}">Non ci sono piste nel sistema</div>
+	<ul>
+		<li th:each="alley : ${bowlingAlleys}">
+			<div th:text="'Numero di pista: '+${alley.alleyNumber}"></div>
 		</li>
 	</ul>
 </body>

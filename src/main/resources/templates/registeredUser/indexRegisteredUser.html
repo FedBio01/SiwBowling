@@ -6,7 +6,8 @@
 		SiwMovie - Homepage
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
-	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 
 <body>
@@ -33,6 +34,17 @@
 	<div class="list-element"> <a href="/registeredUser/formNewReview">Lascia una recensione!</a> </div>
 	<div class="list-element"> <a href="/reviews">Elenco Recensioni</a> </div>
 	</div>
+	
+	<h1>Avvisi</h1>
+	<div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
+	<ul style= "height: 100px; overflow-y: scroll;">
+		<li th:each="notice : ${notices}">
+			<h3 th:text="${notice.title}"></h3>
+			<div>
+				<span th:text="${notice.description}"></span>
+			</div>
+		</li>
+	</ul>
 
 </body>
 

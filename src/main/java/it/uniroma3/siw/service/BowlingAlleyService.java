@@ -27,6 +27,10 @@ public class BowlingAlleyService {
 	public List<BowlingAlley> alleysNotReserved(LocalDate reservationDate,String reservationTime){
 		return (List<BowlingAlley>) this.bowlingAlleyRepository.findAlleysNotReserved(reservationDate, reservationTime);
 	}
+
+	public List<BowlingAlley> findAllBowlingAlleys() {
+		return (List<BowlingAlley>) this.bowlingAlleyRepository.findAll();
+	}
 	
 
 }
