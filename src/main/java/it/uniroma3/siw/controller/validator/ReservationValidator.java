@@ -1,6 +1,6 @@
 package it.uniroma3.siw.controller.validator;
 
-import static it.uniroma3.siw.model.Reservation.TOTAL_BOWLING_ALLEY;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

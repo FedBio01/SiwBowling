@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Reservation {
 	
-	public static final Integer TOTAL_BOWLING_ALLEY = 5;
+	
    
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
