@@ -32,12 +32,14 @@ public class ReviewService {
 		return this.reviewRepository.findById(id).get();
 	}
 	
-	public Review saveReviewToUser(Long userId, Long reviewId) {
+	@Transactional
+	public void saveReviewToUser(Long userId, Long reviewId) {
 		Review review = this.findReviewById(reviewId);
 		User user = this.userService.getUser(userId);
 		user.setReview(review);
 		review.setUser(user);
-		return this.reviewRepository.save(review);
+		this.userService.saveUser(user);
+		this.reviewRepository.save(review);
 	}
 
 	public void deleteReview(Long reviewId) {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwBowling - reservation successful</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<body>
+	<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+
+	<div>
+	
+	<h1>Ecco la tua prenotazione:</h1>
+	<div>
+		<h2>Numero di giocatori: </h2>
+		<h3 th:text="${reservation.numberOfPlayers}"></h3>
+		<span> <a th:href="@{'/registeredUser/formUpdateNumberOfPlayers' + '/' + ${reservation.id}}">Aggiorna</a></span>
+	</div>
+	<div>
+		<h2>Data: </h2>
+		<h3 th:text="${reservation.reservationDate}"></h3>
+		<span> <a th:href="@{'/registeredUser/formUpdateReservationDate' + '/' + ${reservation.id}}">Aggiorna</a></span>
+	</div>
+	<div>
+		<h2>Orario: </h2>
+		<h3 th:text="${reservation.reservationTime}"></h3>
+		<span> <a th:href="@{'/registeredUser/formUpdateReservationTime' + '/' + ${reservation.id}}">Aggiorna</a></span>
+	</div>
+	<div>
+		<h2>Numero di pista: </h2>
+		<h3 th:text="${reservation.bowlingAlley.getAlleyNumber()}"></h3>
+	</div>
+	<button>
+		<a th:href="@{'/'}">Torna alla home</a>
+	</button>
+</body>
+</html>

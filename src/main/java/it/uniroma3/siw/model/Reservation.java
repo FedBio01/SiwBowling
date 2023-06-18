@@ -35,6 +35,17 @@ public class Reservation {
 	@ManyToOne
 	private BowlingAlley bowlingAlley;
 	
+	@ManyToOne
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public String getReservationTime() {
 		return reservationTime;
 	}

@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -30,8 +31,25 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Notice> notices;
+	
+	@OneToMany(mappedBy="user")
+	private List<Reservation> reservations;
+	
+	public User() {
+		notices = new ArrayList<>();
+		reservations = new ArrayList<>();
+		
+	}
 
-    public Long getId() {
+    public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public Long getId() {
 		return id;
 	}
 

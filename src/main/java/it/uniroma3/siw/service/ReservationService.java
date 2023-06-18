@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.model.Reservation;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.ReservationRepository;
 
 
@@ -15,6 +17,9 @@ public class ReservationService {
 	
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	public boolean existsByDateAndTime (LocalDate reservationDate, String reservationTime) {
 		return this.reservationRepository.existsByReservationDateAndReservationTime(reservationDate, reservationTime);
@@ -34,6 +39,24 @@ public class ReservationService {
 
 	public Iterable<Reservation> findAllReservations() {
 		return this.reservationRepository.findAll();
+	}
+	
+	public List<Reservation> findReservationsByUser(Long userId) {
+		return this.reservationRepository.findReservationsByuserId(userId);
+	}
+	
+	@Transactional
+	public Reservation saveReservationToUser(Long userId, Long reservationId) {
+		Reservation reservation = this.findReservationById(reservationId);
+		User user = this.userService.getUser(userId);
+		user.getReservations().add(reservation);
+		reservation.setUser(user);
+		return this.reservationRepository.save(reservation);
+	}
+
+	public void deleteReservation(Long reservationId) {
+		this.reservationRepository.delete(this.findReservationById(reservationId));
+		
 	}
 	
 }
