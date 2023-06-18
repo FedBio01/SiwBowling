@@ -21,5 +21,7 @@ public interface BowlingAlleyRepository extends CrudRepository<BowlingAlley, Lon
 			+ "and reservation_time = :reservationTime ", nativeQuery=true)
 	public Iterable<BowlingAlley> findAlleysNotReserved(@Param("reservationDate") LocalDate reservationDate,
 			@Param("reservationTime") String reservationTime);
-	
+
+	public boolean existsByAlleyNumber(Integer alleyNumber);
+
 }

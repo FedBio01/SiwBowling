@@ -12,21 +12,43 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.controller.validator.ReviewValidator;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Review;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.ReviewService;
+import jakarta.validation.Valid;
 
 @Controller
 public class ReviewController {
 	
 	@Autowired 
 	private ReviewService reviewService;
+	@Autowired
+	private CredentialsService credentialsService;
+	@Autowired
+	private ReviewValidator reviewValidator;
 	
 	@GetMapping(value="/registeredUser/formNewReview")
 	public String formNewReview(Model model) {
 		model.addAttribute("review", new Review());
 		return "registeredUser/formNewReview.html";
 		
+	}
+	
+	@PostMapping("/registeredUser/review")
+	public String newReview(@Valid @ModelAttribute("review") Review review, BindingResult bindingResult, Model model) {
+		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(user.getUsername());
+		this.reviewValidator.validate(review, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			Review createdReview=this.reviewService.createNewReview(review);
+			this.reviewService.saveReviewToUser(credentials.getUser().getId(), review.getId());
+			model.addAttribute(createdReview);
+			return "registeredUser/reviewSuccessful.html";
+		} else {
+			return "registeredUser/formNewReview.html";
+		}
 	}
 	
 }

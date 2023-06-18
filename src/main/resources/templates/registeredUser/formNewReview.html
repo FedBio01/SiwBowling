@@ -28,7 +28,7 @@
 	
 	<div>
 	<h2>Aggiungi una recensione alla struttura</h2>
-	<form th:action="@{'/registered/review/'}" method="POST" th:object="${review}">
+	<form th:action="@{'/registeredUser/review'}" method="POST" th:object="${review}">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
   		</div>

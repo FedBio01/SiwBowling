@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		SiwMovie - Homepage
+		New BowlingAlley
 	</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
@@ -24,21 +24,21 @@
 	</div>
 </header>
 
-	<div><img src="/images/logo-siw.png" width="50%" /></div>
-	<h1>Consulta l'archivio</h1>
-	<div>
-		<a href="/admin/newBowlingAlley">Aggiungi una pista!</a>
-	</div>
-	<div>
-		<a href="/artist">Elenco Artisti</a>
-	</div>
-	<h1>Operazioni per amministratore</h1>
-	<div>
-		<a href="/admin/indexMovie">Operazioni sui film</a>
-	</div>
-	<div>
-		<a href="/admin/indexArtist">Operazioni sugli artisti</a>
-	</div>
+	<h1>Aggiungi una pista</h1>
+	<form th:action="@{/admin/bowlingAlley}" method="POST" th:object="${bowlingAlley}">
+		<div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		</div>
+		
+		
+		<div>
+			<label>Numero Pista:</label> <span><input required type="number" th:field="${bowlingAlley.alleyNumber}" /></span>
+		</div>
+		
+		<div>
+			<span><button type="submit">Conferma</button></span>
+		</div>
+	</form>
 </body>
 
 </html>
