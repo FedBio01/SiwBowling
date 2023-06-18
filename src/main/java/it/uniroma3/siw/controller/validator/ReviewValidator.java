@@ -21,12 +21,11 @@ public class ReviewValidator implements Validator {
 
 	@Override
 	public void validate(Object o, Errors errors){
-		Review review = (Review)o;
 		UserDetails user = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials = credentialsService.getCredentials(user.getUsername());
-			if (review.getUser().getId() == credentials.getUser().getId()) {
-				errors.reject("review.duplicate");
-			}
+		if (credentials.getUser().getReview()!=null) {
+			errors.reject("review.duplicate");
+		}
 	}
 
 	@Override

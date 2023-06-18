@@ -1,14 +1,14 @@
 package it.uniroma3.siw.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -19,12 +19,14 @@ public class BowlingAlley {
         private Long id;
         
         @NotNull
-        @Min(1)
-        @Max(5)
         private Integer alleyNumber;
         
-        @OneToOne(mappedBy="bowlingAlley")
-        private Reservation reservation;
+        @OneToMany(mappedBy="bowlingAlley")
+        private List<Reservation> reservations;
+        
+        public BowlingAlley() {
+        	reservations= new ArrayList<>();
+        }
 
 		public Long getId() {
 			return id;
@@ -42,17 +44,17 @@ public class BowlingAlley {
 			this.alleyNumber = alleyNumber;
 		}
 
-		public Reservation getReservation() {
-			return reservation;
+		public List<Reservation> getReservations() {
+			return reservations;
 		}
 
-		public void setReservation(Reservation reservation) {
-			this.reservation = reservation;
+		public void setReservations(List<Reservation> reservations) {
+			this.reservations = reservations;
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(alleyNumber, reservation);
+			return Objects.hash(alleyNumber, reservations);
 		}
 
 		@Override
@@ -64,6 +66,6 @@ public class BowlingAlley {
 			if (getClass() != obj.getClass())
 				return false;
 			BowlingAlley other = (BowlingAlley) obj;
-			return Objects.equals(alleyNumber, other.alleyNumber) && Objects.equals(reservation, other.reservation);
+			return Objects.equals(alleyNumber, other.alleyNumber) && Objects.equals(reservations, other.reservations);
 		}
 }

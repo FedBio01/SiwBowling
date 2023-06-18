@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -33,6 +34,9 @@ public class Reservation {
 	
 	private String reservationTime;
 	
+	@ManyToOne
+	private BowlingAlley bowlingAlley;
+	
 	public String getReservationTime() {
 		return reservationTime;
 	}
@@ -40,9 +44,6 @@ public class Reservation {
 	public void setReservationTime(String reservationTime) {
 		this.reservationTime = reservationTime;
 	}
-
-	@OneToOne
-	private BowlingAlley bowlingAlley;
 	
 	public Integer getNumberOfPlayers() {
 		return numberOfPlayers;

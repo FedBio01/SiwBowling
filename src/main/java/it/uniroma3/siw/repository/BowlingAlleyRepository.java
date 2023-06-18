@@ -8,5 +8,6 @@ import it.uniroma3.siw.model.BowlingAlley;
 
 public interface BowlingAlleyRepository extends CrudRepository<BowlingAlley, Long> {
 
+	public boolean existsByAlleyNumber(Integer alleyNumber);
 
 }
