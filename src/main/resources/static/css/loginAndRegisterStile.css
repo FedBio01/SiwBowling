@@ -19,13 +19,13 @@ body{
 .login-form{
 	width: 390px;
 	min-height: 500px;
-	background-color: lightsteelblue;
+	background-color:rgb(231, 231, 231);
 	padding: 30px;
 	border-radius: 15px;
 }
 
 .login-form .title{
-	color: black;
+	color: dodgerblue;
 	font-size: 38px;
 	font-weight: 500;
 	letter-spacing: 1px;
@@ -51,15 +51,15 @@ body{
 	width: 100%;
 	padding: 16px;
 	margin: 8px 0px;
-	background-color: lightgray;
-	color: black;
+	background-color: dodgerblue;
+	color: white;
 	font-size: 15px;
 	border:none;
 	border-radius: 25px;
 	outline: none;
 }
 ::placeholder{
-	color: black;
+	color: white;
 }
 
 
@@ -68,7 +68,7 @@ body{
 	top: 50%;
 	transform: translateY(-50%);
 	right: 16px;
-	color:black;
+	color:rgb(231, 231, 231);
 	font-size: 15px;
 	transition: 0.3s;
 }
@@ -82,8 +82,8 @@ body{
 .login-form .input-btn button{
 	width: 100%;
 	margin: 35px 0px;
-	background-color: lightgray;
-	color: black;
+	background-color: dodgerblue;
+	color: white;
 	padding: 14px;
 	border: none;
 	border-radius: 25px;
@@ -99,7 +99,7 @@ body{
 
 .login-form .input-btn button:hover{
 	background-color: #f9f9f9;
-	color: black;
+	color: dodgerblue;
 }
 
 .login-form .signup-link{
