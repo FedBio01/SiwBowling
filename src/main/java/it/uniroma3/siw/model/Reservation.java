@@ -18,8 +18,6 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Reservation {
 	
-	
-   
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

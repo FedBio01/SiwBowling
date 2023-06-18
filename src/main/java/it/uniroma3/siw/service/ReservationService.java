@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Reservation;
 import it.uniroma3.siw.repository.ReservationRepository;
-import jakarta.validation.Valid;
+
 
 @Service
 public class ReservationService {
