@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.controller.validator.ReservationValidator;
 import it.uniroma3.siw.model.Reservation;
-import it.uniroma3.siw.repository.ReservationRepository;
+import it.uniroma3.siw.service.ReservationService;
 import jakarta.validation.Valid;
 
 @Controller
 public class ReservationController {
 
 	@Autowired 
-	private ReservationRepository reservationRepository;
+	private ReservationService reservationService;
 	
 	@Autowired 
 	private ReservationValidator reservationValidator;;
@@ -38,7 +38,7 @@ public class ReservationController {
 	public String newReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult bindingResult, Model model) {
 		this.reservationValidator.validate(reservation, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			this.reservationRepository.save(reservation); 
+			this.reservationService.saveReservation(reservation); 
 			model.addAttribute("reservation", reservation);
 			return "reservation.html";
 		} else {
@@ -48,13 +48,13 @@ public class ReservationController {
 
 	@GetMapping("/reservation/{id}")
 	public String getReservation(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("reservation", this.reservationRepository.findById(id).get());
+		model.addAttribute("reservation", this.reservationService.findReservationById(id));
 		return "reservation.html";
 	}
 
 	@GetMapping("/reservations")
 	public String getReservations(Model model) {
-		model.addAttribute("reservations", this.reservationRepository.findAll());
+		model.addAttribute("reservations", this.reservationService.findAllReservations());
 		return "reservations.html";
 	}
 }
