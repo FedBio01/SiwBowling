@@ -10,16 +10,16 @@ body{
 	display:flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #1b1a1f;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-image: url("/images/1154.jpg");
-	background-size: cover;
+	background-image: url("/images/37478.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
 }
 .login-form{
 	width: 390px;
 	min-height: 500px;
-	background-color:rgb(231, 231, 231);
+	
 	padding: 30px;
 	border-radius: 15px;
 }
