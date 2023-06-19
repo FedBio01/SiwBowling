@@ -35,6 +35,20 @@ th {
 }
 
 
+.form-group {
+  display: block;
+  align-items: right;
+  margin-bottom: 10px;
+}
+
+label {
+  width: 100px; /* Larghezza desiderata per le label */
+}
+
+input {
+  flex: 0.3; /* Occupa lo spazio rimanente */
+}
+
 /* Stile generale della scrollbar */
 
 ::-webkit-scrollbar {
@@ -85,7 +99,6 @@ th {
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1; /* Colore della traccia */
 }
-
 
 
 
