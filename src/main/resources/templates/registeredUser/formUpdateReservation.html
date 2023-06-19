@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>SiwBowling - reservation successful</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+ </head>
+  <title>Prenotazioni Bowling</title>
+</head>
 <body>
-	<header>
-	<div class="barraLogin">
+  <header class="bg-primary text-white text-center py-5">
 		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
 		</span>
 		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+			<div th:text="${userDetails.username}"> </div>
 		</span>
 		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
 		</div>
 	</div>
-</header>
 
+    <h1>Aggiorna prenotazione</h1>
+    <p>Modifica le tue preferenze!</p>
+  </header>
 
-<div class= "login-box" style= "height: 80%; overflow-y: scroll;">
-	<h1>Aggiorna prenotazione</h1>
-	<div>
-		<form th:action="@{'/registeredUser/updateReservation/' + ${reservation.id}}" method="POST" th:object="${reservation}">
-			<div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
-  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
-  			</div>
-			<div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Aggiorna la prenotazione:</h2>
+        <form th:action="@{'/registeredUser/updateReservation/' + ${reservation.id}}" method="POST" th:object="${reservation}">
+          <div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		  </div>
+          <div class="form-group">
 			<label>Numero di giocatori: </label>
 			<input type="text" th:field="${reservation.numberOfPlayers}" required/>
 			<span th:if="${#fields.hasErrors('numberOfPlayers')}" th:errors="*{numberOfPlayers}">
-			</div>
-			
-			<div>
-			<label>Data: </label>
+          </div>
+          <div class="form-group">
+            <label>Data: </label>
 			<input type="date" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" pattern="yyyy-MM-dd" th:field="${reservation.reservationDate}" required/>
 			<span th:if="${#fields.hasErrors('reservationDate')}" th:errors="*{reservationDate}">
-			</div>
-			
-			<div>
-				<label>Orario: </label>
+          </div>
+          <div class="form-group">
+            <label>Orario: </label>
 				<select class="input-element" name="times" th:field="${reservation.reservationTime}" required>
     				<option value="">--Scegli uno dei seguenti orari--</option>
     				<option value="14:00">14:00</option>
@@ -58,9 +59,32 @@
    					<option value="22:00">22:00</option>
     				<option value="23:00">23:00</option>
 			</select>
-			</div>	
+          </div>
+          <button type="submit" class="btn btn-primary">Modifica!</button>
+        </form>
+      </div>
+    </div>
 
-      		<button type="submit">Conferma</button>
-		</form>
+    <div class="row mt-5">
+      <div class="col-lg-6">
+        <h2>Informazioni</h2>
+        <p>Scopri di pi&ugrave; sul nostro bowling:</p>
+        <ul>
+          <li>10 piste da bowling moderne</li>
+          <li>Atmosfera divertente</li>
+          <li>Aperti tutti i giorni dalle 14 alle 23</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-left py-3 mt-5">
+    <div>Contatti</div>
+    <div>Email: bowlingMyLife@gmail.com</div>
+    <div>Whatsapp: 123454321</div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

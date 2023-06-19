@@ -74,10 +74,10 @@ public class ReservationController {
 		return "reservation.html";
 	}
 
-	@GetMapping("/reservations")
+	@GetMapping("/admin/reservations")
 	public String getReservations(Model model) {
 		model.addAttribute("reservations", this.reservationService.findAllReservations());
-		return "reservations.html";
+		return "admin/reservations.html";
 	}
 	
 	@GetMapping("registeredUser/manageReservations")
