@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>
-		SiwMovie - Homepage
-	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <!-- Collegamento ai file CSS di Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/stile.css" />
 </head>
-
 <body>
-
-	<header>
-	<div class="barraLogin">
+  <header>
+    <div class="jumbotron">
 		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
 		</span>
 		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+			<div th:text="${userDetails.username}"> </div>
 		</span>
 		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
 		</div>
-	</div>
-</header>
-
-	<div class="archivio"> 
-	<h1 class="title">Crea una prenotazione o lascia una recensione!</h1>
-	<div class="list-element"> <a href="/registeredUser/formNewReservation">Prenota subito!</a> </div>
-	<div class="list-element"> <a href="/registeredUser/manageReservations">Modifica o cancella le tue prenotazioni</a> </div>
-	<div class="list-element"> <a href="/registeredUser/formNewReview">Lascia una recensione!</a> </div>
-	<div class="list-element"> <a href="/reviews">Elenco Recensioni</a> </div>
-	</div>
 	
-	<h1>Avvisi</h1>
-	<div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
-	<ul style= "height: 100px; overflow-y: scroll;">
+      <h1 class="display-4">Benvenuto al nostro centro bowling!</h1>
+      <p class="lead">Vivi l'esperienza del bowling con i tuoi amici.</p>
+    </div>
+  </header>
+
+  <div class="container-lg">
+    <div class="alert alert-info">
+      <h2> <strong>Avvisi:</strong> </h2> 
+      <div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
+      <ul style= "height: 130px; overflow-y: scroll;">
 		<li th:each="notice : ${notices}">
 			<h3 th:text="${notice.title}"></h3>
 			<div>
@@ -45,7 +37,25 @@
 			</div>
 		</li>
 	</ul>
+    </div>
+
+		<div class="links"> 
+			<h1>Crea una prenotazione o lascia una recensione!</h1>
+			<a href="/registeredUser/formNewReservation" class="btn btn-primary btn-lg">Prenota subito!</a> 
+			<a href="/registeredUser/manageReservations" class="btn btn-primary btn-lg">Modifica o cancella le tue prenotazioni</a>
+			<a href="/registeredUser/formNewReview" class="btn btn-primary btn-lg">Lascia una recensione!</a> 
+			<a href="/reviews" class="btn btn-primary btn-lg">Elenco Recensioni</a>
+		</div>
+	</div>
+	
+	<footer class="footer">
+    	<div>Contatti</div>
+    	<div>Email: bowlingMyLife@gmail.com</div>
+    	<div>Whatsapp: 123454321</div>
+ 	</footer>
+	
 
 </body>
+
 
 </html>

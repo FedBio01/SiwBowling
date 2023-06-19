@@ -1,36 +1,54 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-	<title>BowlingAlleys</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-	<link rel="stylesheet" href="/css/loginAndRegisterStile.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-
-<body>
-	<header>
-	<div class="barraLogin">
-		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
-		</span>
-		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
-		</span>
-		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
-		</div>
-	</div>
-</header>
-
-	<h1>Piste della struttura</h2>
-	<div th:if="${bowlingAlleys==null || bowlingAlleys.isEmpty()}">Non ci sono piste nel sistema</div>
-	<ul>
-		<li th:each="alley : ${bowlingAlleys}">
-			<div th:text="'Numero di pista: '+${alley.alleyNumber}"></div>
-		</li>
-	</ul>
-</body>
-
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <link rel="stylesheet" href="/css/stile.css" />
+      <title>Prenotazioni Bowling</title>
+   </head>
+   <body>
+      <div class="jumbotron">
+		  	<span>
+				<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
+				</span>
+			<span th:if="${userDetails}">
+				<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+				<div th:text="${userDetails.username}"> </div>
+			</span>
+			<div th:unless="${userDetails}">
+				<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
+			</div>
+         <h1 class="display-4">Prenotazioni Bowling</h1>
+         <p class="lead">Visualizza le informazioni sulle prenotazioni dei clienti</p>
+      </div>
+      <div class="container">
+         <table class="table">
+            <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Numero Piste</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr th:if="${bowlingAlleys==null || bowlingAlleys.isEmpty()}">
+                  <td colspan="1">Non ci sono piste</td>
+               </tr>
+               <tr th:each="alley : ${bowlingAlleys}">
+                  <td th:text="${alley.alleyNumber}"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      
+      <footer class="footer">
+    	<div>Contatti</div>
+    	<div>Email: bowlingMyLife@gmail.com</div>
+    	<div>Whatsapp: 123454321</div>
+ 	</footer>
+ 	
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   </body>
 </html>
