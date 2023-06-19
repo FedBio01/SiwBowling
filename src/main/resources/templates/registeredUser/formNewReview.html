@@ -35,14 +35,14 @@
           <div class="form-group">
             <label>Titolo:</label>
 			<input type="text" th:field="${review.title}" required/>
-			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-		    </span>
+			<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:style="'color:red'">
+		    </div>
           </div>
           <div class="form-group">
             <label>Valutazione [1-5]:</label> 
 			<input type="number" th:field="${review.rating}" required/>
-			<span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
-		    </span>
+			<div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" th:style="'color:red'">
+		    </div>
           </div>
           <div class="form-group">
             <label>Testo:</label>

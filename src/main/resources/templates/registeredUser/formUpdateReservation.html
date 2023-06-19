@@ -38,12 +38,12 @@
           <div class="form-group">
 			<label>Numero di giocatori: </label>
 			<input type="text" th:field="${reservation.numberOfPlayers}" required/>
-			<span th:if="${#fields.hasErrors('numberOfPlayers')}" th:errors="*{numberOfPlayers}">
+			<div th:if="${#fields.hasErrors('numberOfPlayers')}" th:errors="*{numberOfPlayers}" th:style="'color:red'">
           </div>
           <div class="form-group">
             <label>Data: </label>
 			<input type="date" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" pattern="yyyy-MM-dd" th:field="${reservation.reservationDate}" required/>
-			<span th:if="${#fields.hasErrors('reservationDate')}" th:errors="*{reservationDate}">
+			<div th:if="${#fields.hasErrors('reservationDate')}" th:errors="*{reservationDate}" th:style="'color:red'">
           </div>
           <div class="form-group">
             <label>Orario: </label>

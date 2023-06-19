@@ -121,7 +121,7 @@ public class ReservationController {
 			model.addAttribute("reservation", realReservation);
 			return "registeredUser/reservationSuccessful.html";
 		} else {
-			return "registeredUser/manageReservations.html"; 
+			return "registeredUser/formUpdateReservation.html"; 
 		}
 	}
 }
