@@ -6,26 +6,25 @@
 
 body{
 	width:100%;
-	height: 100vh;
+	height:100vh;
 	display:flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #1b1a1f;
+	background-color: rgb(0, 0, 15);
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("/images/1154.jpg");
-	background-size: cover;
+	background-image: url("/images/login-bg.jpg");
+	background-size:contain;
 }
 .login-form{
 	width: 390px;
 	min-height: 500px;
-	background-color:rgb(231, 231, 231);
 	padding: 30px;
 	border-radius: 15px;
 }
 
 .login-form .title{
-	color: dodgerblue;
+	color: white;
 	font-size: 38px;
 	font-weight: 500;
 	letter-spacing: 1px;
@@ -51,15 +50,15 @@ body{
 	width: 100%;
 	padding: 16px;
 	margin: 8px 0px;
-	background-color: dodgerblue;
-	color: white;
+	background-color: white;
+	color: black;
 	font-size: 15px;
 	border:none;
 	border-radius: 25px;
 	outline: none;
 }
 ::placeholder{
-	color: white;
+	color: rebeccapurple;
 }
 
 
@@ -76,13 +75,13 @@ body{
 
 .input-element input:focus ~ i,
 .input-element input:valid ~ i{
-	color:white;
+	color:rebeccapurple;
 }
 
 .login-form .input-btn button{
 	width: 100%;
 	margin: 35px 0px;
-	background-color: dodgerblue;
+	background-color: orangered;
 	color: white;
 	padding: 14px;
 	border: none;
@@ -99,11 +98,11 @@ body{
 
 .login-form .input-btn button:hover{
 	background-color: #f9f9f9;
-	color: dodgerblue;
+	color: orangered;
 }
 
 .login-form .signup-link{
-	border-top: 1px solid #393840;
+	border-top: 1px solid white;
 	padding-top: 25px;
 	text-align: center;
 }
@@ -111,10 +110,10 @@ body{
 
 
 .signup-link span{
-	color:black;
+	color:orangered;
 }
 .signup-link span a{
-	color:dodgerblue;
+	color:white;
 	text-decoration: none;
 	margin-left: 2px;
 }
