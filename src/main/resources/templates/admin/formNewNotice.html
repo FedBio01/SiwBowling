@@ -1,47 +1,74 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>
-		Add Notice
-	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-	<link rel="stylesheet" href="../lib/w3.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></head>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+ </head>
+  <title>Add notice</title>
+</head>
 <body>
-	<header>
-	<div class="barraLogin">
+  <header class="bg-primary text-white text-center py-5">
 		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
 		</span>
 		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+			<div th:text="${userDetails.username}"> </div>
 		</span>
 		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
 		</div>
 	</div>
-</header>
-	
-	
-	<div>
-	<h2>Aggiungi un avviso</h2>
-	<form th:action="@{'/admin/notice'}" method="POST" th:object="${review}">
-		<div>
+
+    <h1>Aggiungi un avviso</h1>
+    <p>Tieni aggiornata la clientela!</p>
+  </header>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Nuovo avviso:</h2>
+        <form th:action="@{'/admin/notice'}" method="POST" th:object="${notice}">
+          <div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+  		  </div>
+          <div class="form-group">
+			<div>
 			<label>Titolo:</label>
 			<input type="text" th:field="${notice.title}" required/>
 		</div>
-		<div>
-			<label>Descrizione:</label>
+          </div>
+          <div class="form-group">
+            <label>Descrizione:</label>
 			<input type="text" th:field="${notice.description}" required/>
-		</div>
-     
-      <button type="submit">Conferma</button>
+          </div>
+          <button type="submit" class="btn btn-primary">Prenota</button>
+        </form>
+      </div>
+    </div>
 
-	</form>
-	</div>
+    <div class="row mt-5">
+      <div class="col-lg-6">
+        <h2>Informazioni</h2>
+        <p>Scopri di pi&ugrave; sul nostro bowling:</p>
+        <ul>
+          <li>10 piste da bowling moderne</li>
+          <li>Atmosfera divertente</li>
+          <li>Aperti tutti i giorni dalle 14 alle 23</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-left py-3 mt-5">
+    <div>Contatti</div>
+    <div>Email: bowlingMyLife@gmail.com</div>
+    <div>Whatsapp: 123454321</div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>

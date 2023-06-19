@@ -125,6 +125,26 @@ header a {
     color:black;
 }
 
+/* Stile generale della scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* Larghezza della scrollbar */
+}
+
+/* Stile del thumb (il "pulsante" che trascini) */
+::-webkit-scrollbar-thumb {
+  background-color: royalblue; /* Colore del thumb */
+  border-radius: 5px; /* Raggio dei bordi del thumb */
+}
+
+/* Stile del thumb al passaggio del mouse */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+/* Stile della traccia (la parte della scrollbar non occupata dal thumb) */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Colore della traccia */
+}
 
 
 

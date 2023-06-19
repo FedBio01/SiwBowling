@@ -10,16 +10,18 @@
 </head>
 <body>
   <header class="bg-primary text-white text-center py-5">
-	 <span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="false"></i> </a>
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
 		</span>
 		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+			<div th:text="${userDetails.username}"> </div>
 		</span>
 		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
 		</div>
+	</div>
+
     <h1>Prenotazioni Bowling</h1>
     <p>Prenota la tua partita e divertiti!</p>
   </header>

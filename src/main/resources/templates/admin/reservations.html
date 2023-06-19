@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwBowling - reservations</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+
+<body>
+	<header>
+	<div class="barraLogin">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
+			<div th:text="${userDetails.username}"></div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
+		</div>
+	</div>
+</header>
+
+	
+	<h1>Ecco le recensioni: </h1>
+	<div th:if="${reservations==null || reservations.isEmpty()}">Non sono state effettuate prenotazioni</div>
+	<ul>
+		<li th:each="reservation : ${reservations}">
+			<h2 th:text="'Prenotazione di ' + ${reservation.getUser().getName()} + ' ' +  ${reservation.getUser().getSurname()}"></h2>
+			<div>
+				<span>Numero di giocatori:: </span>
+				<span th:text="${reservation.numberOfPlayers}"></span>
+			</div>
+			<div>
+				<span>Data: </span>
+				<span th:text="${reservation.reservationDate}"></span>
+			</div>
+			<div>
+				<span>Orario: </span>
+				<span th:text="${reservation.reservationTime}"></span>
+			</div>
+		</li>
+	</ul>
+</body>
+</html>
