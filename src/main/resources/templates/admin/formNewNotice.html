@@ -10,7 +10,7 @@
   <title>Add notice</title>
 </head>
 <body>
-  <header class="bg-primary text-white text-center py-5">
+  <header class="jumbotron">
 		<span>
 			<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
 		</span>
@@ -23,8 +23,8 @@
 		</div>
 	</div>
 
-    <h1>Aggiungi un avviso</h1>
-    <p>Tieni aggiornata la clientela!</p>
+    <h1 class="display-4">Aggiungi un avviso</h1>
+    <p class="lead">Tieni aggiornata la clientela!</p>
   </header>
 
   <div class="container mt-5">
@@ -45,7 +45,7 @@
             <label>Descrizione:</label>
 			<input type="text" th:field="${notice.description}" required/>
           </div>
-          <button type="submit" class="btn btn-primary">Prenota</button>
+          <button type="submit" class="btn btn-primary">Inserisci</button>
         </form>
       </div>
     </div>

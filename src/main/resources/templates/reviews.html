@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                <tr th:if="${reviews==null || reviews.isEmpty()}">
-                  <td colspan="1">Non ci sono prenotazioni effettuate</td>
+                  <td colspan="1">Non ci sono recensioni effettuate</td>
                </tr>
                <tr th:each="review : ${reviews}">
                   <td th:text="${review.title}"></td>
@@ -45,7 +45,7 @@
          </table>
       </div>
       
-      <footer class="footer absolute">
+      <footer class="footer">
     	<div>Contatti</div>
     	<div>Email: bowlingMyLife@gmail.com</div>
     	<div>Whatsapp: 123454321</div>

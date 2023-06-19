@@ -42,7 +42,7 @@ th {
 }
 
 label {
-  width: 100px; /* Larghezza desiderata per le label */
+  width: 25%; /* Larghezza desiderata per le label */
 }
 
 input {
