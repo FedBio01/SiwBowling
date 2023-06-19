@@ -1,9 +1,9 @@
-
 .jumbotron {
-      
-      background-color: dodgerblue;
-      background-size: cover;
+      background-image: url("/images/ciotole-di-bowling.jpg");
+      background-size: contain;
       background-position: center;
+      background-color: black;
+      background-repeat: no-repeat;
       color: #fff;
       padding: 50px;
 }
@@ -42,7 +42,7 @@ th {
 }
 
 label {
-  width: 100px; /* Larghezza desiderata per le label */
+  width: 40%; /* Larghezza desiderata per le label */
 }
 
 input {
