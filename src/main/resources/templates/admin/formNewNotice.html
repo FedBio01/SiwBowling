@@ -34,13 +34,13 @@
           <div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
   		  </div>
-          <div class="form-group">
+          <div class="form-group" >
 			<div>
 			<label>Titolo:</label>
 			<input type="text" th:field="${notice.title}" required/>
 		</div>
           </div>
-          <div class="form-group">
+          <div class="form-group" >
             <label>Descrizione:</label>
 			<input type="text" th:field="${notice.description}" required/>
           </div>
