@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col-lg-6">
         <h2>Recensisci la struttura</h2>
-        <form th:action="@{'/registeredUser/review'}" method="POST" th:object="${review}">
+        <form th:action="@{'/registeredUser/review'}" method="POST" th:object="${review}" class="form-inline">
           <div th:if="${#fields.hasGlobalErrors()}" th:style="'color:red'">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
   		  </div>

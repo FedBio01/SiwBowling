@@ -1,48 +1,59 @@
 <!DOCTYPE html>
-<html>
 
-<head>
-	<title>SiwMovie - Registrazione conclusa</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-
-<body>
-	<header>
-	<div class="barraLogin">
-		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
-		</span>
-		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
-		</span>
-		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
-		</div>
-	</div>
-</header>
-
-	
-	<h1>Ecco le recensioni: </h1>
-	<div th:if="${reviews==null || reviews.isEmpty()}">Non ci sono recensioni nel sistema</div>
-	<ul>
-		<li th:each="review : ${reviews}">
-			<h2 th:text="'Recensione di ' + ${review.user.getName()} + ' ' +  ${review.user.getSurname()}"></h2>
-			<div>
-				<span>Titolo: </span>
-				<span th:text="${review.title}"></span>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <link rel="stylesheet" href="/css/stile.css" />
+      <title>New Review</title>
+   </head>
+   <body>
+      <div class="jumbotron">
+		  	<span>
+				<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
+				</span>
+			<span th:if="${userDetails}">
+				<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+				<div th:text="${userDetails.username}"> </div>
+			</span>
+			<div th:unless="${userDetails}">
+				<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
 			</div>
-			<div>
-				<span>Testo: </span>
-				<span th:text="${review.text}"></span>
-			</div>
-			<div>
-				<span>Valutazione: </span>
-				<span th:text="${review.rating}"></span>
-			</div>
-		</li>
-	</ul>
-</body>
+         <h1 class="display-4">Ecco le nostre recensioni:</h1>
+         
+      </div>
+      <div class="container">
+         <table class="table" style="width: 70%;">
+            <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Titolo</th>
+                  <th scope="col">Valutazione [1-5]</th>
+                  <th scope="col">Descrizione</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr th:if="${reviews==null || reviews.isEmpty()}">
+                  <td colspan="1">Non ci sono prenotazioni effettuate</td>
+               </tr>
+               <tr th:each="review : ${reviews}">
+                  <td th:text="${review.title}"></td>
+                  <td th:text="${review.rating}"></td>
+                  <td th:text="${review.text}"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      
+      <footer class="footer absolute">
+    	<div>Contatti</div>
+    	<div>Email: bowlingMyLife@gmail.com</div>
+    	<div>Whatsapp: 123454321</div>
+ 	</footer>
+ 	
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   </body>
 </html>
 
