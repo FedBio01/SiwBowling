@@ -56,7 +56,7 @@ public class BowlingAlleyController {
 	
 	@GetMapping("/admin/bowlingAlleys")
 	public String bowlingAlleys(Model model) {
-		model.addAttribute("bowlingAlleys", this.bowlingAlleyService.findAllBowlingAlleys());
+		model.addAttribute("bowlingAlleys", this.bowlingAlleyService.findAllBowlingAlleysOrdered());
 		return "admin/bowlingAlleys.html";
 	}
 }

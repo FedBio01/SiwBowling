@@ -1,47 +1,62 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-	<title>SiwBowling - reservations</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-	<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-
-<body>
-	<header>
-	<div class="barraLogin">
-		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
-		</span>
-		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
-		</span>
-		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
-		</div>
-	</div>
-</header>
-
-	
-	<h1>Ecco le recensioni: </h1>
-	<div th:if="${reservations==null || reservations.isEmpty()}">Non sono state effettuate prenotazioni</div>
-	<ul>
-		<li th:each="reservation : ${reservations}">
-			<h2 th:text="'Prenotazione di ' + ${reservation.getUser().getName()} + ' ' +  ${reservation.getUser().getSurname()}"></h2>
-			<div>
-				<span>Numero di giocatori:: </span>
-				<span th:text="${reservation.numberOfPlayers}"></span>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <link rel="stylesheet" href="/css/stile.css" />
+      <title>Prenotazioni Bowling</title>
+   </head>
+   <body>
+      <div class="jumbotron">
+		  	<span>
+				<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
+				</span>
+			<span th:if="${userDetails}">
+				<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+				<div th:text="${userDetails.username}"> </div>
+			</span>
+			<div th:unless="${userDetails}">
+				<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
 			</div>
-			<div>
-				<span>Data: </span>
-				<span th:text="${reservation.reservationDate}"></span>
-			</div>
-			<div>
-				<span>Orario: </span>
-				<span th:text="${reservation.reservationTime}"></span>
-			</div>
-		</li>
-	</ul>
-</body>
+         <h1 class="display-4">Prenotazioni Bowling</h1>
+         <p class="lead">Visualizza le informazioni sulle prenotazioni dei clienti</p>
+      </div>
+      <div class="container">
+         <table class="table">
+            <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Utente</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Orario</th>
+                  <th scope="col">Numero di giocatori</th>
+                  <th scope="col">Pista</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr th:if="${reservations==null || reservations.isEmpty()}">
+                  <td colspan="1">Non ci sono prenotazioni effettuate</td>
+               </tr>
+               <tr th:each="reservation : ${reservations}">
+                  <td th:text="${reservation.getUser().getName()}+' '+${reservation.getUser().getSurname()}"></td>
+                  <td th:text="${reservation.reservationDate}"></td>
+                  <td th:text="${reservation.reservationTime}"></td>
+                  <td th:text="${reservation.numberOfPlayers}"></td>
+                  <td th:text="${reservation.bowlingAlley.getAlleyNumber()}"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      
+      <footer class="footer">
+    	<div>Contatti</div>
+    	<div>Email: bowlingMyLife@gmail.com</div>
+    	<div>Whatsapp: 123454321</div>
+ 	</footer>
+ 	
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   </body>
 </html>

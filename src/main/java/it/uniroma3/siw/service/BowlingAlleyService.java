@@ -28,8 +28,8 @@ public class BowlingAlleyService {
 		return (List<BowlingAlley>) this.bowlingAlleyRepository.findAlleysNotReserved(reservationDate, reservationTime);
 	}
 
-	public List<BowlingAlley> findAllBowlingAlleys() {
-		return (List<BowlingAlley>) this.bowlingAlleyRepository.findAll();
+	public List<BowlingAlley> findAllBowlingAlleysOrdered() {
+		return (List<BowlingAlley>) this.bowlingAlleyRepository.findAllBowlingAlleysOrderedByAlleyNumberAsc();
 	}
 	
 

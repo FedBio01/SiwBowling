@@ -3,6 +3,7 @@ package it.uniroma3.siw.repository;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,5 +25,8 @@ public interface BowlingAlleyRepository extends CrudRepository<BowlingAlley, Lon
 
 
 	public boolean existsByAlleyNumber(Integer alleyNumber);
+	
+	 @Query(value = "select * from bowling_alley ba order by ba.alley_number ASC", nativeQuery=true)
+	  public List<BowlingAlley> findAllBowlingAlleysOrderedByAlleyNumberAsc();
 
 }
