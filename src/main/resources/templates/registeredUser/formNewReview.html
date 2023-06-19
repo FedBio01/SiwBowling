@@ -4,11 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/stile.css" />
   <title>Prenotazioni Bowling</title>
 </head>
 <body>
   <header class="bg-primary text-white text-center py-5">
+		<span>
+			<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
+		</span>
+		<span th:if="${userDetails}">
+			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+			<div th:text="${userDetails.username}"> </div>
+		</span>
+		<div th:unless="${userDetails}">
+			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
+		</div>
+	</div>
     <h1>Aggiungi una recensione alla struttura</h1>
   </header>
 
@@ -41,20 +53,10 @@
       </div>
     </div>
 
-    <div class="row mt-5">
-      <div class="col-lg-6">
-        <h2>Informazioni</h2>
-        <p>Scopri di pi&ugrave; sul nostro bowling:</p>
-        <ul>
-          <li>10 piste da bowling moderne</li>
-          <li>Atmosfera divertente</li>
-          <li>Aperti tutti i giorni dalle 14 alle 23</li>
-        </ul>
-      </div>
-    </div>
+    
   </div>
 
-  <footer class="bg-dark text-white text-left py-3 mt-5">
+  <footer class="footer">
     <div>Contatti</div>
     <div>Email: bowlingMyLife@gmail.com</div>
     <div>Whatsapp: 123454321</div>

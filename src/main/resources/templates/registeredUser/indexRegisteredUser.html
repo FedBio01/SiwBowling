@@ -22,6 +22,7 @@
 	
       <h1 class="display-4">Benvenuto al nostro centro bowling!</h1>
       <p class="lead">Vivi l'esperienza del bowling con i tuoi amici.</p>
+      <span>Aperti tutti i giorni dalle 14 alle 23</span>
     </div>
   </header>
 
@@ -29,7 +30,7 @@
     <div class="alert alert-info">
       <h2> <strong>Avvisi:</strong> </h2> 
       <div th:if="${notices==null || notices.isEmpty()}">Non ci sono avvisi</div>
-      <ul style= "height: 130px; overflow-y: scroll;">
+      <ul style= "height: 120px; overflow-y: scroll;">
 		<li th:each="notice : ${notices}">
 			<h3 th:text="${notice.title}"></h3>
 			<div>
