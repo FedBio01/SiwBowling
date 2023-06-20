@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<title>SiwMovie - Registrazione conclusa</title>
-	<link rel="stylesheet" href="/css/stile.css" />
-</head>
-
-<body>
-	<header>
-	<div class="barraLogin">
-		<span>
-			<a href="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
-		</span>
-		<span th:if="${userDetails}">
-			<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> </a> </span>
-			<div th:text="${userDetails.username}"></div>
-		</span>
-		<div th:unless="${userDetails}">
-			<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"></i> </a>
-		</div>
-	</div>
-</header>
-
-	<div>
-		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
-	</div>
-	<h1>Congratulazioni ti sei registrato!</h1>
-	<div>
-		<span>Nome: </span>
-		<span th:text="${user.name}"></span>
-	</div>
-	<div>
-		<span>Cognome: </span>
-		<span th:text="${user.surname}"></span>
-	</div>
-	<div>
-		<span>Email: </span>
-		<span th:text="${user.email}"></span>
-	</div>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+      <link rel="stylesheet" href="/css/stile.css" />
+      <title>Registration successful</title>
+   </head>
+   <body>
+      <div class="jumbotron">
+		  	<span>
+				<a href="/"> <i class="fa fa-home" aria-hidden="true" th:style="'color:white'"> </i> </a>
+				</span>
+			<span th:if="${userDetails}">
+				<span> <a href="/logout"> <i class="fa fa-sign-out" aria-hidden="true"  th:style="'color:white'"> </i> </a> </span>
+				<div th:text="${userDetails.username}"> </div>
+			</span>
+			<div th:unless="${userDetails}">
+				<a href="/login"> <i class="fa fa-sign-in" aria-hidden="true"  th:style="'color:white'"> </i> </a>
+			</div>
+         <h1 class="display-4">Complimenti! Ti sei registrato!</h1>
+         <p class="lead">Ecco un riepilogo della tua registrazione:</p>
+      </div>
+      <div class="container">
+         <table class="table" style="width: 70%;">
+               <thead class="thead-dark">
+               <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Cognome</th>
+                  <th scope="col">Email</th>
+               </tr>
+            </thead>
+            <tbody>
+                  <td th:text="${user.name}"></td>
+                  <td th:text="${user.surname}"></td>
+                  <td th:text="${user.email}"></td>
+            </tbody>
+         </table>
+      </div>
+      
+      <footer class="footer">
+    	<div>Contatti</div>
+    	<div>Email: bowlingMyLife@gmail.com</div>
+    	<div>Whatsapp: 123454321</div>
+ 	</footer>
+ 	
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   </body>
 </html>

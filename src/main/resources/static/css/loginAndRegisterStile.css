@@ -10,7 +10,7 @@ body{
 	display:flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgb(0, 0, 40);
+	background-color: rgb(0, 0, 15);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-image: url("/images/login-bg.jpg");
