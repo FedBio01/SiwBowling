@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.model.Credentials;
-import it.uniroma3.siw.model.Notice;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.NoticeService;
@@ -25,6 +25,9 @@ public class AuthenticationController {
 	
 	@Autowired
 	private CredentialsService credentialsService;
+	
+	@Autowired
+	private CredentialsValidator credentialsValidator;
 
     @Autowired
 	private UserService userService;
@@ -86,6 +89,7 @@ public class AuthenticationController {
                  Model model) {
 
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+		this.credentialsValidator.validate(credentials, credentialsBindingResult);
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             userService.saveUser(user);
             credentials.setUser(user);
@@ -93,6 +97,6 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        return "formRegisterUser";
     }
 }
